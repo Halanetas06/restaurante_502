@@ -1,7 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib import messages
 from .models import Cliente, Empleado, Mesa, Plato, Orden, Factura
 
-# Create your views here.
+
+def vista_login(request):
+    if request.user.is_authenticated:
+        return redirect('inicio')
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usuario = form.get_user()
+            login(request, usuario)
+            return redirect('inicio')
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos")
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'gestion/login.html', {'form': form})
+
+def vista_registro(request):
+    if request.user.is_authenticated:
+        return redirect('inicio')
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            messages.success(request, "Cuenta creada exitosamente. Ahora puedes iniciar sesión.")
+            return redirect('login')
+        else:
+            messages.error(request, "Error en el registro. Verifica los datos.")
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'gestion/registro.html', {'form': form})
+
+def vista_logout(request):
+    logout(request)
+    return redirect('login')
 
 def inicio(request):
     context = {

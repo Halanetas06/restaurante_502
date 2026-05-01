@@ -1,40 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pasta La Vista - Gestión</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Restaurante Pasta La Vista</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
     <header>
-        <h1>Pasta La Vista</h1>
-        <p style="margin: 5px 0 0; opacity: 0.8;">Sistema de Gestión de Pedidos</p>
+        <h1>Sistema de Gestión de Pedidos - Pasta La Vista</h1>
     </header>
 
     <nav>
-        <a href="/">Inicio</a>
-        <a href="/clientes/">Clientes</a>
-        <a href="/empleados/">Empleados</a>
-        <a href="/mesas/">Mesas</a>
-        <a href="/platos/">Platos</a>
-        <a href="/ordenes/">Órdenes</a>
-        <a href="/facturas/">Facturas</a>
-        <a href="/admin/">Admin</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'lista_clientes' %}">Clientes</a>
+        <a href="{% url 'lista_empleados' %}">Empleados</a>
+        <a href="{% url 'lista_mesas' %}">Mesas</a>
+        <a href="{% url 'lista_platos' %}">Platos</a>
+        <a href="{% url 'lista_ordenes' %}">Órdenes</a>
+        <a href="{% url 'lista_facturas' %}">Facturas</a>
+        <a href="/admin/" target="_blank" class="nav-admin">ADMINISTRADOR</a>
+        <a href="{% url 'logout' %}" class="nav-logout">
+                Cerrar Sesión (<strong>{{ user.username }}</strong>)
+            </a> {% else %}
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'registro' %}">Registrarse</a> {% endif %}
     </nav>
 
     <div class="contenedor">
-        {% block content %} {% endblock %}
+        {% if user.is_authenticated %} {% block content %} {% endblock %} {% else %}
+        <div class="acceso-restringido">
+            <h2>Acceso Restringido</h2>
+            <p>Por favor, inicia sesión para gestionar el sistema del restaurante.</p>
+            <a href="{% url 'login' %}" class="btn-auth btn-login-redirect">IR AL LOGIN</a>
+        </div>
+        {% endif %}
     </div>
-
-    <footer style="text-align: center; padding: 20px; color: #888; font-size: 0.9rem;">
-        &copy; 2026 Restaurante Pasta La Vista | Panel de Control
-    </footer>
 </body>
 
 </html>
