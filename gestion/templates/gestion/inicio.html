@@ -1,35 +1,67 @@
-{% extends 'gestion/base.html' %}
-
-{% block content %}
+{% extends 'gestion/base.html' %} {% block content %}
 <h2>Panel principal</h2>
 
-<div class="card">
+<div class="card" onclick="openCrud('Clientes')">
     <h3>Clientes</h3>
     <p>{{ total_clientes }}</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openCrud('Empleados')">
     <h3>Empleados</h3>
     <p>{{ total_empleados }}</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openCrud('Mesas')">
     <h3>Mesas</h3>
     <p>{{ total_mesas }}</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openCrud('Platos')">
     <h3>Platos</h3>
     <p>{{ total_platos }}</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openCrud('Órdenes')">
     <h3>Órdenes</h3>
     <p>{{ total_ordenes }}</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openCrud('Facturas')">
     <h3>Facturas</h3>
     <p>{{ total_facturas }}</p>
 </div>
+
+<div id="modalCrud" class="modal-crud">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeCrud()">&times;</span>
+        <h2 id="modalTitle" style="border: none; padding: 0; margin-bottom: 10px;">Gestión</h2>
+        <p style="color: #666;">Selecciona la acción que deseas realizar:</p>
+
+        <div class="crud-options">
+            <button class="btn-crud btn-create"><span>➕</span> AGREGAR</button>
+            <button class="btn-crud btn-read"><span>👁️</span> VER LISTA</button>
+            <button class="btn-crud btn-update"><span>✏️</span> EDITAR</button>
+            <button class="btn-crud btn-delete"><span>🗑️</span> ELIMINAR</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openCrud(seccion) {
+        document.getElementById('modalTitle').innerText = 'Gestión de ' + seccion;
+        document.getElementById('modalCrud').style.display = 'block';
+    }
+
+    function closeCrud() {
+        document.getElementById('modalCrud').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById('modalCrud');
+        if (event.target == modal) {
+            closeCrud();
+        }
+    }
+</script>
+
 {% endblock %}

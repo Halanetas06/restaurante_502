@@ -296,3 +296,99 @@ h2,
 .helptext-list li {
     margin-bottom: 3px;
 }
+
+
+/*ESTILOS PARA EL CRUD*/
+
+.modal-crud {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--blanco);
+    margin: 10% auto;
+    padding: 35px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: var(--card-hover-sombra);
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-modal:hover {
+    color: var(--principal);
+}
+
+.crud-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-crud {
+    padding: 18px 10px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-crud:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-create {
+    background: #27ae60;
+}
+
+.btn-read {
+    background: #2980b9;
+}
+
+.btn-update {
+    background: #f39c12;
+}
+
+.btn-delete {
+    background: #c0392b;
+}
