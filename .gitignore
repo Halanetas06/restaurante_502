@@ -1,8 +1,16 @@
 venv/
 env/
+<<<<<<< HEAD
 pycache/
+=======
+__pycache__/
+>>>>>>> 8c2596013430ebd5ad092624f230015db9e186c1
 *.pyc
 db.sqlite3
 .env
 *.log
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+>>>>>>> 8c2596013430ebd5ad092624f230015db9e186c1

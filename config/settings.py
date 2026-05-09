@@ -20,7 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = 'django-insecure-rsw!k9mrc&11o(ih=gms7vjk155bsh@1!$n*5kzss4z0ajsh0r'
+=======
+SECRET_KEY = 'django-insecure-rh_)k4tcbupeu)c++fgqez54q84iikaq(dul+hn8g@akldo5nd'
+>>>>>>> 8c2596013430ebd5ad092624f230015db9e186c1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,6 +87,7 @@ DATABASES = {
         'PORT': '1433',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
+<<<<<<< HEAD
             'extra-params': 'TrustServerCertificate=no;',
         },
     }
@@ -90,6 +95,16 @@ DATABASES = {
 DATABASE_CONNECTION_POOLING = False
 CONN_MAX_AGE = 0
 
+=======
+            'extra_params': 'TrustServerCertificate=no',
+        },
+    }
+}
+DATABASE_CONNECTION_POOLING = False 
+CONN_MAX_AGE = 0
+
+
+>>>>>>> 8c2596013430ebd5ad092624f230015db9e186c1
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
