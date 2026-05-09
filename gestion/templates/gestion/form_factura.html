@@ -1,0 +1,26 @@
+{% extends 'gestion/base.html' %} {% block content %}
+<div class="form-container-box">
+    <h2 style="color: #800000; text-align: center; font-weight: bold;">
+        {% if form.instance.id %}Editar Factura #{{ form.instance.id }}{% else %}Generar Nueva Factura{% endif %}
+    </h2>
+    <hr class="divider">
+
+    <form method="post" class="standard-form">
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+            <label class="form-label">{{ field.label }}</label>
+            <div class="field-input">
+                {{ field }}
+            </div>
+            {% if field.errors %}
+            <span class="error-text">{{ field.errors.0 }}</span> {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn-save">GENERAR FACTURA</button>
+            <a href="{% url 'lista_facturas' %}" class="btn-cancel">CANCELAR</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

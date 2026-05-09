@@ -1,0 +1,28 @@
+{% extends 'gestion/base.html' %} {% block content %}
+<div class="auth-wrapper" style="min-height: auto; padding: 20px 0;">
+    <div class="auth-container" style="max-width: 600px;">
+        <h2>{{ titulo }}</h2>
+        <p style="color: #666; margin-bottom: 25px;">Completa la información del empleado</p>
+
+        <form method="post" style="text-align: left;">
+            {% csrf_token %} {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">
+                        {{ field.label }}:
+                    </label> {{ field }} {% if field.errors %}
+                <small style="color: var(--secundario);">{{ field.errors|striptags }}</small> {% endif %}
+            </div>
+            {% endfor %}
+
+            <div style="margin-top: 30px; display: flex; gap: 10px;">
+                <button type="submit" class="btn-auth" style="margin-top: 0;">
+                    GUARDAR CAMBIOS
+                </button>
+                <a href="{% url 'lista_empleados' %}" class="btn-auth" style="background: #ccc; text-decoration: none; text-align: center; margin-top: 0;">
+                    CANCELAR
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

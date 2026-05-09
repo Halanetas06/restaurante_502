@@ -38,10 +38,10 @@
         <p style="color: #666;">Selecciona la acción que deseas realizar:</p>
 
         <div class="crud-options">
-            <button class="btn-crud btn-create"><span>➕</span> AGREGAR</button>
-            <button class="btn-crud btn-read"><span>👁️</span> VER LISTA</button>
-            <button class="btn-crud btn-update"><span>✏️</span> EDITAR</button>
-            <button class="btn-crud btn-delete"><span>🗑️</span> ELIMINAR</button>
+            <button id="btnCreate" class="btn-crud btn-create"><span></span> AGREGAR</button>
+            <button id="btnRead" class="btn-crud btn-read"><span></span> VER LISTA</button>
+            <button id="btnUpdate" class="btn-crud btn-update"><span></span> EDITAR</button>
+            <button id="btnDelete" class="btn-crud btn-delete"><span></span> ELIMINAR</button>
         </div>
     </div>
 </div>
@@ -49,7 +49,72 @@
 <script>
     function openCrud(seccion) {
         document.getElementById('modalTitle').innerText = 'Gestión de ' + seccion;
-        document.getElementById('modalCrud').style.display = 'block';
+        const modal = document.getElementById('modalCrud');
+
+        const btnCreate = document.getElementById('btnCreate');
+        const btnRead = document.getElementById('btnRead');
+        const btnUpdate = document.getElementById('btnUpdate');
+        const btnDelete = document.getElementById('btnDelete');
+
+        btnUpdate.style.opacity = "1";
+        btnDelete.style.opacity = "1";
+
+        if (seccion === 'Empleados') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_empleado' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_empleados' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona primero un empleado en 'Ver Lista'");
+                window.location.href = "{% url 'lista_empleados' %}";
+            };
+
+        } else if (seccion === 'Clientes') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_cliente' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_clientes' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona primero un cliente en 'Ver Lista'");
+                window.location.href = "{% url 'lista_clientes' %}";
+            };
+
+        } else if (seccion === 'Mesas') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_mesa' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_mesas' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona primero una mesa en 'Ver Lista'");
+                window.location.href = "{% url 'lista_mesas' %}";
+            };
+
+        } else if (seccion === 'Platos') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_plato' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_platos' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona un plato de la lista.");
+                window.location.href = "{% url 'lista_platos' %}";
+            };
+
+        } else if (seccion === 'Órdenes') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_orden' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_ordenes' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona una orden directamente de la lista.");
+                window.location.href = "{% url 'lista_ordenes' %}";
+            };
+
+        } else if (seccion === 'Facturas') {
+            btnCreate.onclick = () => window.location.href = "{% url 'crear_factura' %}";
+            btnRead.onclick = () => window.location.href = "{% url 'lista_facturas' %}";
+            btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("Para editar o eliminar, selecciona una factura en 'Ver Lista'");
+                window.location.href = "{% url 'lista_facturas' %}";
+            };
+        } else {
+            btnCreate.onclick = btnRead.onclick = btnUpdate.onclick = btnDelete.onclick = function() {
+                alert("El CRUD de " + seccion + " estará disponible pronto.");
+            };
+            btnUpdate.style.opacity = "0.5";
+            btnDelete.style.opacity = "0.5";
+        }
+
+        modal.style.display = 'block';
     }
 
     function closeCrud() {
